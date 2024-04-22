@@ -1,0 +1,42 @@
+# Requests to test our API routes easily (without a frontend)
+
+# In order to use this file => install VsCode extension "REST Client" from "Huachao Mao"
+# Start your backend
+# You should see a link "Send Request" popping up above each request
+
+# Testing routes using a requests file like this is recommend to test
+# the functionality of the backend FIRST, before connecting a frontend and debugging issues 
+# with the backend from the frontend, which is way more difficult 
+
+@API_URL = http://localhost:5000
+
+### Test home route of backend
+GET {{API_URL}}
+
+### GET list of all users (to check if signups worked)
+GET {{API_URL}}/users
+
+### SIGNUP Route
+POST {{API_URL}}/auth/signup
+Content-Type: application/json
+
+{
+  "username": "robbos",
+  "email": "robbos@rob.com",
+  "password": "r123"
+}
+
+### Login route
+POST {{API_URL}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "robbos@rob.com",
+  "password": "r123"
+}
+
+
+### Protected route to check if token is valid
+GET {{API_URL}}/me
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjAxODhmZTAxYTA2NmVjMGE3ZmNhYmIiLCJ1c2VybmFtZSI6InJvYmJvcyIsImlhdCI6MTcxMTM3NzQxOSwiZXhwIjoxNzExMzc5MjE5fQ.6I0RV77ytzHe9-wiO9fqzNiwixVUkE6EBGnXiwFI7hQ
+
