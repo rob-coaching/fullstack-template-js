@@ -2,13 +2,10 @@ import { useCallback, useState } from "react";
 import { Context } from "./useStore";
 import { loginApi, signupApi } from "../utils/axiosCalls";
 import { useNavigate } from "react-router-dom";
-import { clearUserInLs, setUserInLs } from "./localStorage";
+import { clearUserInLs, loadUserFromLs, setUserInLs } from "./localStorage";
 
 export const DataProvider = ({ children }) => {
-  const [user, setUser] = useState({
-    username: "",
-    email: "",
-  });
+  const [user, setUser] = useState( loadUserFromLs() );
   const [error, setError] = useState("");
   const navigate = useNavigate()
 
