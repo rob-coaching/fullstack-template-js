@@ -23,3 +23,7 @@ export const loginApi = async (email, password) => {
 export const signupApi = async (userData) => {
   return axiosInstance.post("/auth/signup", userData)
 }
+
+export const authCheckApi = async (token) => {
+  return axiosInstance.get("/me")
+}
