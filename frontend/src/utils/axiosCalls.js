@@ -24,6 +24,6 @@ export const signupApi = async (userData) => {
   return axiosInstance.post("/auth/signup", userData)
 }
 
-export const authCheckApi = async (token) => {
+export const authCheckApi = async () => {
   return axiosInstance.get("/me")
 }
