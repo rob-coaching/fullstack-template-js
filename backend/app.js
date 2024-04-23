@@ -4,6 +4,10 @@ import cors from 'cors';
 import User from './models/User.js';
 import { guard } from './middleware/guard.js';
 import authRouter from './routes/auth.router.js'
+// this lib will handle ALL errors thrown in async functions (so e.g. all mongoose errors) 
+// and forwards them to the central error handler!
+import "express-async-errors" 
+
 const app = express();
 
 app.use(cors()) // ALLOW ACCESS TO BACKEND FROM BROWSER (=from fetch)

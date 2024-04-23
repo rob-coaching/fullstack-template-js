@@ -11,7 +11,7 @@ authRouter.post("/login", async (req, res, next) => {
   // input data validation
   if (!email || !password) {
     return next({
-      error: "Please provide email & oassword field",
+      error: "Please provide email & password field",
       status: 400,
     });
   }
@@ -27,7 +27,7 @@ authRouter.post("/login", async (req, res, next) => {
 
     // user found => match password with password hash!
     if (!bcrypt.compareSync(password, user.password)) {
-      next({
+      return next({
         error: "User with these credentials does not exist",
         status: 400,
       });
