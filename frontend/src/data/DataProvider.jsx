@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { Context } from "./useStore";
-import { authCheckApi, loginApi, setToken, signupApi } from "../utils/axiosCalls";
+import { authCheckApi, clearToken, loginApi, setToken, signupApi } from "../utils/axiosCalls";
 import { useNavigate } from "react-router-dom";
 import { clearUserInLs, loadUserFromLs, setUserInLs } from "./localStorage";
 
@@ -59,6 +59,7 @@ export const DataProvider = ({ children }) => {
   const logout = () => {
     setUser();
     clearUserInLs();
+    clearToken(); // clear token header in axios
   };
 
   const sharedData = { user, setUser, login, logout, signup, error, setError };
