@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -5,8 +9,54 @@
   text-align: center;
 }
 
+main {
+  padding: 3rem;
+}
+
 nav {
   display: flex;
   gap: 30px;
   justify-content: center;
+
+  a {
+    text-decoration: none;
+    padding: 10px;
+    background-color: #ccc;
+    border-radius: 20px;
+    color: black;
+  }
+  a.active {
+    background-color: lightcoral;
+  }
+}
+
+div.error {
+  padding: 10px;
+  color: red;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: 1s;
+
+  .active {
+    border: 2px solid red;
+  }
+}
+
+div.error.noti {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 300px;
+  margin: auto;
+
+  @media screen and (min-width: 600px) {
+    flex-direction: row;
+  }
 }

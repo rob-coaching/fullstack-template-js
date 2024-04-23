@@ -5,9 +5,12 @@ import { BrowserRouter } from "react-router-dom";
 import { DataProvider } from "./data/DataProvider.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <DataProvider>
-    <BrowserRouter>
+  // important note:
+  // always nested your Context provider INSIDE React Router!
+  // this way we can use router features like navigate / redirects inside the Context
+  <BrowserRouter>
+    <DataProvider>
       <App />
-    </BrowserRouter>
-  </DataProvider>
+    </DataProvider>
+  </BrowserRouter>
 );
