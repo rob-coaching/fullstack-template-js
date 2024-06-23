@@ -1,12 +1,12 @@
 import './db-connect.js'
 import express from "express";
 import cors from 'cors';
-import User from './models/User.js';
 import { guard } from './middleware/guard.js';
 import authRouter from './routes/auth.router.js'
 // this lib will handle ALL errors thrown in async functions (so e.g. all mongoose errors) 
 // and forwards them to the central error handler!
 import "express-async-errors" 
+import { prisma } from './db-connect.js';
 
 const app = express();
 
@@ -26,7 +26,7 @@ app.get("/me", guard, (req, res) => {
 
 // USERS route (protect if ya want using "guard" middleware)
 app.get("/users", async (req, res) => {
-  const usersAll = await User.find()
+  const usersAll = await prisma.user.findMany()
   res.json( usersAll ) 
 })
 

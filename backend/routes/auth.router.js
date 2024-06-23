@@ -1,7 +1,7 @@
 import { Router } from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import User from "../models/User.js";
+import { prisma } from "../db-connect.js";
 
 const authRouter = Router();
 
@@ -18,7 +18,12 @@ authRouter.post("/login", async (req, res, next) => {
 
   try {
     // check if user exists + include password hash in result!
-    const user = await User.findOne({ email }).select("+password");
+    const user = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+
     if (!user)
       return next({
         error: "User with these credentials does not exist",
@@ -34,36 +39,43 @@ authRouter.post("/login", async (req, res, next) => {
     }
 
     // user found! create token!
-    const token = jwt.sign({ _id: user._id, username: user.username }, process.env.JWT_SECRET, {
-      expiresIn: process.env.JWT_LIFETIME
-    });
-    const userPublic = user.toObject()
-    delete userPublic.password
-    res.json({ ...userPublic, token });
-  } catch (err) { next(err) }
+    delete user.password;
+    const token = jwt.sign(
+      { _id: user._id, username: user.username },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: process.env.JWT_LIFETIME,
+      }
+    );
+    res.json({ ...user, token });
+  } catch (err) {
+    next(err);
+  }
 });
 
 authRouter.post("/signup", async (req, res, next) => {
+  const { email, password } = req.body;
 
-  const { email, password } = req.body
-
-  if(!email || !password) {
-    return next({ error: "Please provide email & password", status: 400 })
+  if (!email || !password) {
+    return next({ error: "Please provide email & password", status: 400 });
   }
 
   try {
     // check if user already exists!
-    const userFound = await User.findOne({ email });
+    const userFound = await prisma.user.findUnique({
+      where: { email },
+    });
 
     if (userFound) {
       return next({ error: "User already exists", status: 400 });
     }
 
-    req.body.password = bcrypt.hashSync(password)
-    const userNew = await User.create(req.body);
-    const userPublic = userNew.toObject()
-    delete userPublic.password
-    res.json(userPublic);
+    req.body.password = bcrypt.hashSync(password);
+    const userNew = await prisma.user.create({
+      data: req.body,
+    });
+    delete userNew.password;
+    res.json(userNew);
   } catch (err) {
     next(err);
   }

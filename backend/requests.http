@@ -9,6 +9,7 @@
 # with the backend from the frontend, which is way more difficult 
 
 @API_URL = http://localhost:5000
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvYmJvcyIsImlhdCI6MTcxOTE2NjgyOCwiZXhwIjoxNzE5MTY4NjI4fQ.6Zlf9Lyt3jD6uWXc_AQcUEX2yepcG9kE3qzPiwcHExg
 
 ### Test home route of backend
 GET {{API_URL}}
@@ -38,5 +39,5 @@ Content-Type: application/json
 
 ### Protected route to check if token is valid
 GET {{API_URL}}/me
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjAxODhmZTAxYTA2NmVjMGE3ZmNhYmIiLCJ1c2VybmFtZSI6InJvYmJvcyIsImlhdCI6MTcxMTM3NzQxOSwiZXhwIjoxNzExMzc5MjE5fQ.6I0RV77ytzHe9-wiO9fqzNiwixVUkE6EBGnXiwFI7hQ
+Authorization: {{TOKEN}}
 
