@@ -14,9 +14,6 @@
 ### Test home route of backend
 GET {{API_URL}}
 
-### GET list of all users (to check if signups worked)
-GET {{API_URL}}/users
-
 ### SIGNUP Route
 POST {{API_URL}}/auth/signup
 Content-Type: application/json
@@ -38,6 +35,27 @@ Content-Type: application/json
 
 
 ### Protected route to check if token is valid
-GET {{API_URL}}/me
+GET {{API_URL}}/users/me
+Authorization: {{TOKEN}}
+
+### GET list of all users (to check if signups worked)
+GET {{API_URL}}/users
+Authorization: {{TOKEN}}
+
+### Delete user
+DELETE  {{API_URL}}/users/4
+Authorization: {{TOKEN}}
+
+### Update user
+PATCH {{API_URL}}/users/3
+Content-Type: application/json
+Authorization: {{TOKEN}}
+
+{
+  "username": "Bob"
+}
+
+### Get single user
+GET {{API_URL}}/users/3
 Authorization: {{TOKEN}}
 
