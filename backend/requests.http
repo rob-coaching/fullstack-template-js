@@ -60,10 +60,13 @@ Authorization: {{TOKEN}}
 GET {{API_URL}}/users/1
 Authorization: {{TOKEN}}
 
-### Get user posts
+### Get users posts
 GET {{API_URL}}/users/1/posts
 Authorization: {{TOKEN}}
 
+### Get post with author
+GET {{API_URL}}/posts/1
+Authorization: {{TOKEN}}
 
 
 ### Create related post
@@ -72,5 +75,5 @@ Authorization: {{TOKEN}}
 Content-Type: application/json
 
 {
-  "title": "Newww Post"
+  "title": "Newww Post 2.0"
 }
