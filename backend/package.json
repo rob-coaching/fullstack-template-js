@@ -6,7 +6,12 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon -w . -w .env app.js",
-    "deploy": "vercel --prod"
+    "deploy": "vercel --prod",
+    "migration:create": "prisma migrate dev --create-only",
+    "migrate": "prisma migrate dev",
+    "migrate:deploy": "prisma migrate deploy",
+    "mc": "npm run migration:create",
+    "mig": "npm run migrate"
   },
   "type": "module",
   "keywords": [],
@@ -20,7 +25,8 @@
     "express": "^4.17.3",
     "express-async-errors": "^3.1.1",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.2.0"
+    "mongoose": "^8.2.0",
+    "prisma": "^5.15.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

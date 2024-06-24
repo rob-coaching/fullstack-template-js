@@ -7,6 +7,7 @@ import cors from "cors";
 import authRouter from "./routes/auth.router.js";
 import usersRouter from "./routes/users.router.js";
 import { guard } from "./middleware/guard.js";
+import postsRouter from "./routes/posts.router.js";
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.get("/", (req, res) => {
 // load routers
 app.use("/auth", authRouter);
 app.use("/users", guard, usersRouter);
+app.use("/posts", guard, postsRouter);
 
 // 404 handler (=> handles non existing routes)
 app.use((req, res, next) => {

@@ -40,13 +40,10 @@ authRouter.post("/login", async (req, res, next) => {
 
     // user found! create token!
     delete user.password;
-    const token = jwt.sign(
-      { _id: user._id, username: user.username },
-      process.env.JWT_SECRET,
-      {
-        expiresIn: process.env.JWT_LIFETIME,
-      }
-    );
+    const tokenPayload = { _id: user.id, username: user.username };
+    const token = jwt.sign(tokenPayload, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_LIFETIME,
+    });
     res.json({ ...user, token });
   } catch (err) {
     next(err);

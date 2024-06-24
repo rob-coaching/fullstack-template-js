@@ -24,10 +24,30 @@ usersRouter.get("/:id", async (req, res, next) => {
   const user = await prisma.user.findUnique({
     where: {
       id: idNum,
-    },
+    },    
   });
   res.json(user);
 });
+
+usersRouter.get("/:id/posts", async (req, res, next) => {
+  const { id } = req.params;
+  const idNum = Number(id);
+  if (!idNum) {
+    return next({ error: "Invalid ID value " + id });
+  }
+  const posts = await prisma.user.findUnique({
+    where: {
+      id: idNum,
+    },
+    // fetch related data
+    include: {
+      posts: true
+    }
+  });
+  console.log(posts)
+  res.json(posts);
+});
+
 
 usersRouter.patch("/:id", async (req, res, next) =>{
   const { id } = req.params;

@@ -9,10 +9,19 @@
 # with the backend from the frontend, which is way more difficult 
 
 @API_URL = http://localhost:5000
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvYmJvcyIsImlhdCI6MTcxOTE2NjgyOCwiZXhwIjoxNzE5MTY4NjI4fQ.6Zlf9Lyt3jD6uWXc_AQcUEX2yepcG9kE3qzPiwcHExg
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjEsInVzZXJuYW1lIjoicm9iYm9zIiwiaWF0IjoxNzE5MjUzODYwLCJleHAiOjE3MTkyNTU2NjB9.AJlTUB1D-E89AwmZbbKtWc-19cmmZu0FG8ZXn2wrwKo
 
 ### Test home route of backend
 GET {{API_URL}}
+
+### Login route
+POST {{API_URL}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "robbos@rob.com",
+  "password": "r123"
+}
 
 ### SIGNUP Route
 POST {{API_URL}}/auth/signup
@@ -24,14 +33,6 @@ Content-Type: application/json
   "password": "r123"
 }
 
-### Login route
-POST {{API_URL}}/auth/login
-Content-Type: application/json
-
-{
-  "email": "robbos@rob.com",
-  "password": "r123"
-}
 
 
 ### Protected route to check if token is valid
@@ -56,6 +57,20 @@ Authorization: {{TOKEN}}
 }
 
 ### Get single user
-GET {{API_URL}}/users/3
+GET {{API_URL}}/users/1
 Authorization: {{TOKEN}}
 
+### Get user posts
+GET {{API_URL}}/users/1/posts
+Authorization: {{TOKEN}}
+
+
+
+### Create related post
+POST {{API_URL}}/posts
+Authorization: {{TOKEN}}
+Content-Type: application/json
+
+{
+  "title": "Newww Post"
+}
